@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Movie Details</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            margin: 20px;
+            text-align: center;
+            color: #333;
+        }
+
+        h1 {
+            color: #3498db;
+        }
+
+        form {
+            margin: 20px auto;
+            max-width: 600px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #3498db;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 12px 20px;
+            cursor: pointer;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Update Movie Details</h1>
+    
+    <form method="post" action="/update_movie_details/{{ movie.Title }}">
+        <!-- Form to Update Movie Details -->
+        <label for="new_title">New Title:</label>
+        <input type="text" id="new_title" name="new_title" required value="{{ movie.Title }}">
+        
+        <label for="new_language">New Original Language:</label>
+        <input type="text" id="new_language" name="new_language" required value="{{ movie.Original_Language }}">
+        
+        <label for="new_genre">New Genre:</label>
+        <input type="text" id="new_genre" name="new_genre" required value="{{ movie.Genre }}">
+        
+        <label for="new_rotten_tomatoes">New Rotten Tomatoes:</label>
+        <input type="text" id="new_rotten_tomatoes" name="new_rotten_tomatoes" required value="{{ movie.Rotten_Tomatoes }}">
+        
+        <button type="submit">Update Movie</button>
+    </form>
+</body>
+</html>

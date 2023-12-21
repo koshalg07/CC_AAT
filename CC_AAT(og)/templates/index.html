@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie CRUD Application</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            margin: 20px;
+            text-align: center;
+            color: #333;
+        }
+
+        h1 {
+            color: #3498db;
+            margin-bottom: 100px; /* Added margin to center align */
+        }
+
+        button {
+            padding: 12px 20px;
+            margin: 10px;
+            cursor: pointer;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        div {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Movie CRUD Application</h1>
+    
+    <div>
+        <a href="/get_all_movies">
+            <button>Get All Movies</button>
+        </a>
+    </div>
+
+    <div>
+        <a href="/add_movie">
+            <button>Add Movie</button>
+        </a>
+    </div>
+
+    <div>
+        <a href="/search">
+            <button>Search Movie</button>
+        </a>
+    </div>
+
+    <div>
+        <a href="/delete_movie">
+            <button>Delete Movie</button>
+        </a>
+    </div>
+</body>
+</html>

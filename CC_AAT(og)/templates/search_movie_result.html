@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Movie Result</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            margin: 20px;
+            text-align: center;
+            color: #333;
+        }
+
+        h1 {
+            color: #3498db;
+        }
+
+        h2 {
+            color: #3498db;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        .not-found {
+            color: #d35400; /* Dark Orange color for 'not found' message */
+        }
+    </style>
+</head>
+<body>
+    <h1>Search Movie Result</h1>
+
+    {% if movie %}
+        <h2>{{ movie.Title }}</h2>
+        <p>Release Date: {{ movie.Release_Date.strftime('%d-%m-%Y') }}</p>
+        <p>Original Language: {{ movie.Original_Language }}</p>
+        <p>Genre: {{ movie.Genre }}</p>
+        <p>Rotten Tomatoes: {{ movie.Rotten_Tomatoes }}</p>
+    {% else %}
+        <p class="not-found">Movie not found.</p>
+    {% endif %}
+</body>
+</html>

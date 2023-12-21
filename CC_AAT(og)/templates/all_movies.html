@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Movies</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            margin: 20px;
+            text-align: center;
+            color: #333;
+        }
+
+        h1 {
+            color: #3498db;
+        }
+
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #3498db;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>All Movies</h1>
+        
+        <table border="1" id="moviesTable">
+            <!-- Display Movies Table -->
+            <!-- Table Header -->
+            <thead>
+                <tr>
+                    <th>Release Date</th>
+                    <th>Title</th>
+                    <th>Original Language</th>
+                    <th>Genre</th>
+                    <th>Rotten Tomatoes</th>
+                </tr>
+            </thead>
+            <!-- Table Body will be added dynamically using Flask -->
+        </table>
+    </div>
+
+    <script>
+        // Fetch movies data from Flask route
+        fetch('/get_all_movies_data')
+            .then(response => response.json())
+            .then(data => {
+                const moviesTable = document.getElementById('moviesTable');
+                const tableBody = document.createElement('tbody');
+
+                // Iterate through the data and create table rows
+                data.forEach(movie => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${movie.Release_Date}</td>
+                        <td>${movie.Title}</td>
+                        <td>${movie.Original_Language}</td>
+                        <td>${movie.Genre}</td>
+                        <td>${movie.Rotten_Tomatoes}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+
+                // Append the table body to the table
+                moviesTable.appendChild(tableBody);
+            })
+            .catch(error => console.error('Error fetching movies data:', error));
+    </script>
+</body>
+</html>
