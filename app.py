@@ -47,10 +47,10 @@ def delete_movie(title, release_date):
     return result.deleted_count
 
 # Function to update a movie in the database
-def update_movie(title, release_date, new_data):
+def update_movie(title, release_date, new_data, new_release_date):
     result = movies_collection.update_one(
-        {"Title": title, "Release_Date": datetime.strptime(release_date, "%d-%m-%Y")},
-        {"$set": new_data}
+        {"Title": title, "Release_Date": release_date},
+        {"$set": {**new_data, "Release_Date": new_release_date}}
     )
     return result.modified_count
 
@@ -105,15 +105,15 @@ def check_movie_route():
         movie = movies_collection.find_one({"Title": update_title})
 
         if movie:
-            return render_template('check_movie.html', movie=movie)
+            return render_template('update_movie_details.html', movie=movie)
         else:
             error_message = "Movie not found."
             return render_template('error.html', error_message=error_message)
 
     return render_template('check_movie.html')
 
-@app.route('/update_movie/<old_title>', methods=['GET', 'POST'])
-def update_movie_route(old_title):
+@app.route('/update_movie_details/<old_title>', methods=['POST'])
+def update_movie_details_route(old_title):
     movie = movies_collection.find_one({"Title": old_title})
 
     if request.method == 'POST':
@@ -121,6 +121,10 @@ def update_movie_route(old_title):
         new_language = request.form['new_language']
         new_genre = request.form['new_genre']
         new_rotten_tomatoes = request.form['new_rotten_tomatoes']
+        new_release_date = request.form['new_release_date']
+
+        # Convert the new_release_date to a datetime object
+        new_release_date = datetime.strptime(new_release_date, "%Y-%m-%d")
 
         new_data = {
             "Title": new_title,
@@ -129,7 +133,8 @@ def update_movie_route(old_title):
             "Rotten_Tomatoes": new_rotten_tomatoes,
         }
 
-        update_movie(old_title, movie['Release_Date'], new_data)
+        # Update the movie with the new data and release date
+        update_movie(old_title, movie['Release_Date'], new_data, new_release_date)
         return redirect(url_for('get_all_movies_page'))
 
     return render_template('update_movie_details.html', movie=movie)

@@ -70,6 +70,9 @@
         <label for="new_rotten_tomatoes">New Rotten Tomatoes:</label>
         <input type="text" id="new_rotten_tomatoes" name="new_rotten_tomatoes" required value="{{ movie.Rotten_Tomatoes }}">
         
+        <label for="new_release_date">New Release Date:</label>
+        <input type="date" id="new_release_date" name="new_release_date" required value="{{ movie.Release_Date.strftime('%Y-%m-%d') }}">
+        
         <button type="submit">Update Movie</button>
     </form>
 </body>
